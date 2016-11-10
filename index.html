@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+
+		<link rel="stylesheet" type="text/css" href="css/base.css">
+		<link rel="stylesheet" type="text/css" href="css/modules.css">
+
+		<title>SatPointer</title>
+	</head>
+
+	<body>
+		<div id="app" class="app">
+			<h1>SatPointer</h1>
+
+			<div class="sats">
+				<select id="sat-select" name="sat-select">
+					<option>Select a satellite from this list...</option>
+					<option v-for="sat in satellites">{{ sat.Name }}</option>
+				</select>
+			</div>
+		</div>
+
+		<script src="js/lib/vue.min.js"></script>
+
+		<script src="js/utils.js"></script>
+		<script src="js/satellites.js"></script>
+		<script src="js/main.js"></script>
+	</body>
+</html>

@@ -1,0 +1,16 @@
+/*
+ * Modules styling
+ */
+
+.app {
+	width: 85%;
+	margin: 0 auto;
+}
+
+.app > h1 {
+	text-align: center;
+}
+
+.sats > select {
+	width: 100%;
+}
