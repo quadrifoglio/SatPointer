@@ -13,17 +13,46 @@
 		<div id="app" class="app">
 			<h1>SatPointer</h1>
 
-			<div class="sats">
-				<select id="sat-select" name="sat-select">
-					<option>Select a satellite from this list...</option>
-					<option v-for="sat in satellites">{{ sat.Name }}</option>
-				</select>
+			<div v-if="error" class="error">
+				<p>{{ error }}</p>
+			</div>
+
+			<div v-if="satellites == null" class="loading">
+				<div class="loading-loader"></div>
+			</div>
+
+			<div v-if="satellites !== null && error == null">
+				<div class="sats">
+					<select id="sat-select" name="sat-select">
+						<option>Select a satellite from this list...</option>
+						<option v-for="sat in satellites">{{ sat.name }} - Longitude {{ sat.longitude }}°</option>
+					</select>
+				</div>
+
+				<div v-if="selectedSat !== null" class="gps-status">
+					<p v-if="localization == null">Waiting for GPS data...</p>
+
+					<div v-else>
+						<p>Your current localization</p>
+						<p>Latitude: {{ localization.lat }}° - Longitude {{ localization.lng }}°</p>
+					</div>
+				</div>
+
+				<div v-if="localization !== null" class="results">
+					<p v-if="result == null">Loading...</p>
+
+					<div v-else class="results-data">
+						<p>Azimuth: {{ result.az }}°</p>
+						<p>Elevation: {{ result.el }}°</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
 		<script src="js/lib/vue.min.js"></script>
 
 		<script src="js/utils.js"></script>
+		<script src="js/math.js"></script>
 		<script src="js/satellites.js"></script>
 		<script src="js/main.js"></script>
 	</body>

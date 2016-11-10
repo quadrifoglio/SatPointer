@@ -3,6 +3,6 @@
  */
 
 var Satellites = [
-	{Name: "Eutelset W3A", Longitude: 7.0},
-	{Name: "Eutelset W5A", Longitude: -5.0},
+	{name: "Eutelset W3A", longitude: 7.0},
+	{name: "Eutelset W5A", longitude: -5.0},
 ];
