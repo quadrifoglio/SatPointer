@@ -78,3 +78,4 @@ var calculate = function(app) {
 };
 
 document.addEventListener("DOMContentLoaded", main, false);
+document.addEventListener('deviceready', this.onDeviceReady, false);
