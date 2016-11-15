@@ -7,7 +7,8 @@ var main = function() {
 	var app = new Vue({
 		el: "#app",
 		data: {
-			satellites: null, // List of satellite data, initialized after error checking
+			loaded: false, // True if application is loaded
+			satellites: Satellites, // List of satellite data
 			error: null, // Fatal error
 			selectedSat: null, // Gets a value when a satellite is selected
 			localization: null, // Gets a value when GPS data is available
@@ -21,13 +22,18 @@ var main = function() {
 		return;
 	}
 
-/*	app.$data.satellites = Satellites;
-	app.$data.error = null;
+	setTimeout(function() {
+		// When the selector changes, trigger a call to process()
+		el("#sat-select").addEventListener("change", function() {
+			process(app);
+		});
+	}, 100);
 
-	// When the selector changes, trigger a call to process()
-	el("#sat-select").addEventListener("change", function() {
-		process(app);
-	});*/
+	// Hide loader and show application
+	app.$data.loaded = true;
+
+	el("#app").style.display = "block";
+	el("#loading").style.display = "none";
 };
 
 // Retreives the satllite from the selector, query
@@ -45,8 +51,8 @@ var process = function(app) {
 	// Query GPS data
 	/*navigator.geolocation.getCurrentPosition(function(loc) {
 		app.$data.localization = {
-			lat: loc.coords.latitude,
-			lng: loc.coords.longitude,
+			lat: Math.floor(loc.coords.latitude * 1000) / 1000,
+			lng: Math.floor(loc.coords.longitude * 1000) / 1000,
 		};
 
 		calculate(app);

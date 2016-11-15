@@ -26,5 +26,5 @@ var computeDishData = function(lat, lng, satLng) {
 	var v2 = r1 * Math.sqrt(1 - clat * clat * clng * clng);
 	var el = Math.atan2(v1, v2) * toDeg;
 
-	return {az: az, el: el};
+	return {az: Math.floor(az * 1000) / 1000, el: Math.floor(el * 1000) / 1000};
 };

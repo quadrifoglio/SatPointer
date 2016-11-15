@@ -2,7 +2,28 @@
  * Modules styling
  */
 
+
+/*
+ * General purpose elements
+ */
+.panel-header {
+	width: 100%;
+	background: #303030;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+.panel-body {
+	height: 100%;
+	background: #3D3D3D;
+}
+
+/*
+ * Sections
+ */
 .app {
+	display: none;
+
 	width: 85%;
 	height: 100%;
 	margin: 0 auto;
@@ -18,20 +39,19 @@
 }
 
 .loading {
-	height: 100%;
-	display: table-cell; /* comportement visuel de cellule */
-	vertical-align: middle;
-}
+	position: absolute;
+	width: 120px;
+	height: 120px;
+	top:0;
+	bottom: 0;
+	left: 0;
+	right: 0;
 
-.loading-loader {
+	margin: auto;
 	border: 16px solid #222222;
 	border-top: 16px solid #3498db;
 	border-radius: 50%;
-	width: 120px;
-	height: 120px;
 	animation: spin 0.85s linear infinite;
-
-	margin: 0 auto;
 }
 
 @keyframes spin {
@@ -43,10 +63,35 @@
 	width: 100%;
 }
 
-.gps-status {
+/*
+ * GPS Section
+ */
+
+.gps {
 	margin-top: 40px;
 }
 
 .results {
 	margin-top: 40px;
 }
+
+.gps-loc-lat, .gps-loc-lng, .results-data-az, .results-data-el {
+	display: inline-block;
+	width: 49.1%;
+	height: 75px;
+
+	text-align: center;
+}
+
+.gps-loc-head, .results-data-head {
+	font-size: 20px;
+}
+
+.gps-loc-val, .results-data-val {
+	font-size: 18px;
+	line-height: 72px;
+}
+
+/*
+ * Results section
+ */
