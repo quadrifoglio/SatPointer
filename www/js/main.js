@@ -77,5 +77,5 @@ var calculate = function(app) {
 	app.$data.result = computeDishData(loc.lat, loc.lng, satLng);
 };
 
-document.addEventListener("DOMContentLoaded", main, false);
-document.addEventListener('deviceready', this.onDeviceReady, false);
+//document.addEventListener("DOMContentLoaded", main, false);
+document.addEventListener('deviceready', main, false);
