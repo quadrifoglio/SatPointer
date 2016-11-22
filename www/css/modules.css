@@ -2,7 +2,6 @@
  * Modules styling
  */
 
-
 /*
  * General purpose elements
  */
@@ -27,6 +26,7 @@
 	width: 85%;
 	height: 100%;
 	margin: 0 auto;
+	margin-top: 25px;
 }
 
 .app > h1 {
@@ -59,21 +59,18 @@
 	100% { transform: rotate(360deg); }
 }
 
-.sats > select {
+.sat-select {
 	width: 100%;
+	height: 35px;
+
+	color: white;
+	border: 0;
+	background: #3D3D3D;
 }
 
 /*
  * GPS Section
  */
-
-.gps {
-	margin-top: 40px;
-}
-
-.results {
-	margin-top: 40px;
-}
 
 .gps-loc-lat, .gps-loc-lng, .results-data-az, .results-data-el {
 	display: inline-block;
@@ -91,7 +88,3 @@
 	font-size: 18px;
 	line-height: 72px;
 }
-
-/*
- * Results section
- */

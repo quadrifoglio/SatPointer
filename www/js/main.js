@@ -13,6 +13,7 @@ var main = function() {
 			selectedSat: null, // Gets a value when a satellite is selected
 			localization: null, // Gets a value when GPS data is available
 			result: null, // Gets a value when the calculations are complete
+			compass: null, // Phone orientation, initialized after geting results
 		}
 	});
 
@@ -49,7 +50,7 @@ var process = function(app) {
 	app.$data.result = null; // Set or reset the result
 
 	// Query GPS data
-	/*navigator.geolocation.getCurrentPosition(function(loc) {
+	navigator.geolocation.getCurrentPosition(function(loc) {
 		app.$data.localization = {
 			lat: Math.floor(loc.coords.latitude * 1000) / 1000,
 			lng: Math.floor(loc.coords.longitude * 1000) / 1000,
@@ -58,12 +59,12 @@ var process = function(app) {
 		calculate(app);
 	}, function(error) {
 		app.$data.error = error.message;
-	});*/
+	});
 
-	app.$data.localization = {
+	/*app.$data.localization = {
 		lat: 45.89,
 		lng: 6.12
-	};
+	};*/
 
 	calculate(app);
 };
@@ -75,7 +76,29 @@ var calculate = function(app) {
 	var satLng = app.$data.selectedSat.longitude;
 
 	app.$data.result = computeDishData(loc.lat, loc.lng, satLng);
+
+	if(!navigator.compass) {
+		return;
+	}
+
+	navigator.compass.watchHeading(function(h) {
+		heading(app, h);
+	}, function(err) {
+		console.log(err);
+	});
 };
 
-//document.addEventListener("DOMContentLoaded", main, false);
-document.addEventListener('deviceready', main, false);
+// Display the phone's compass information
+var heading = function(app, h) {
+	app.$data.compass = {
+		az: Math.floor(h.magneticHeading * 1000) / 1000,
+		el: 0
+	};
+
+	window.addEventListener('deviceorientation', function(o) {
+		app.$data.compass.el = Math.floor(o.beta * 1000) / 1000;
+	});
+};
+
+document.addEventListener("DOMContentLoaded", main, false);
+//document.addEventListener('deviceready', main, false);

@@ -16,3 +16,30 @@ body {
 	background: #222222;
 	font-family: sans-serif;
 }
+
+/*
+ * Positioning classes
+ */
+.left {
+	float: left;
+}
+
+.right {
+	float: right;
+}
+
+.cb {
+	clear: both;
+}
+
+.m-top-lg {
+	margin-top: 40px;
+}
+
+.m-top-md {
+	margin-top: 25px;
+}
+
+.m-top-sm {
+	margin-top: 10px;
+}

@@ -21,13 +21,13 @@
 				<h1>SatPointer</h1>
 
 				<div class="sats">
-					<select id="sat-select" name="sat-select">
+					<select id="sat-select" class="sat-select" name="sat-select">
 						<option>Select a satellite from this list...</option>
 						<option v-for="sat in satellites">GEO - {{ sat.name }} - Longitude {{ sat.longitude }}°</option>
 					</select>
 				</div>
 
-				<div v-if="selectedSat !== null" class="gps">
+				<div v-if="selectedSat !== null" class="gps m-top-lg">
 					<p v-if="localization == null">Waiting for GPS data...</p>
 
 					<div v-else class="gps-loc">
@@ -45,7 +45,7 @@
 					</div>
 				</div>
 
-				<div v-if="localization !== null" class="results">
+				<div v-if="localization !== null" class="results m-top-lg">
 					<p v-if="result == null">Loading...</p>
 
 					<div v-else class="results-data">
@@ -62,9 +62,24 @@
 						</div>
 					</div>
 				</div>
+
+				<div v-if="compass !== null" class="results-data m-top-lg">
+					<p>Current phone orientation</p>
+
+					<div class="results-data-az">
+						<p class="panel-header results-data-head">Azimuth</p>
+						<p class="panel-body results-data-val">{{ compass.az }}°</p>
+					</div>
+
+					<div class="results-data-el">
+						<p class="panel-header results-data-head">Elevation</p>
+						<p class="panel-body results-data-val">{{ compass.el }}°</p>
+					</div>
+				</div>
 			</div>
 		</div>
 
+		<script src="cordova.js"></script>
 		<script src="js/lib/vue.min.js"></script>
 
 		<script src="js/utils.js"></script>

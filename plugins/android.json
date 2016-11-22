@@ -9,6 +9,9 @@
     "installed_plugins": {
         "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "com.github.quadrifoglio.satPointer"
+        },
+        "cordova-plugin-device-orientation": {
+            "PACKAGE_NAME": "com.github.quadrifoglio.satPointer"
         }
     },
     "dependent_plugins": {}
