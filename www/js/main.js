@@ -23,6 +23,12 @@ var main = function() {
 		return;
 	}
 
+	window.addEventListener("batterystatus", function(b) {
+		document.getElementById("battery").innerHTML = b.level + "%";
+	}, false);
+
+	// Wait for the application to be fully loaded beforque
+	// querying DOM elements
 	setTimeout(function() {
 		// When the selector changes, trigger a call to process()
 		el("#sat-select").addEventListener("change", function() {
@@ -96,9 +102,10 @@ var heading = function(app, h) {
 	};
 
 	window.addEventListener('deviceorientation', function(o) {
-		app.$data.compass.el = Math.floor(o.beta * 1000) / 1000;
+		if(o.beta != 0)
+			app.$data.compass.el = Math.floor(o.beta * 1000) / 1000;
 	});
 };
 
-document.addEventListener("DOMContentLoaded", main, false);
-//document.addEventListener('deviceready', main, false);
+//document.addEventListener("DOMContentLoaded", main, false);
+document.addEventListener('deviceready', main, false);
