@@ -57,6 +57,8 @@ var process = function(app) {
 
 	// Query GPS data
 	navigator.geolocation.getCurrentPosition(function(loc) {
+		navigator.vibrate(200);
+
 		app.$data.localization = {
 			lat: Math.floor(loc.coords.latitude * 1000) / 1000,
 			lng: Math.floor(loc.coords.longitude * 1000) / 1000,
@@ -66,13 +68,6 @@ var process = function(app) {
 	}, function(error) {
 		app.$data.error = error.message;
 	});
-
-	/*app.$data.localization = {
-		lat: 45.89,
-		lng: 6.12
-	};*/
-
-	calculate(app);
 };
 
 // Calculate the azimuth and elevation based on GPS
@@ -87,10 +82,18 @@ var calculate = function(app) {
 		return;
 	}
 
+	// Heading: compass (azimuth)
 	navigator.compass.watchHeading(function(h) {
 		heading(app, h);
 	}, function(err) {
 		console.log(err);
+	});
+
+	// Device orientation: vertical angle (elevation)
+	window.addEventListener('deviceorientation', function(o) {
+		var v = Math.floor(o.beta * 1000) / 1000;
+		if(v != 0)
+			app.$data.compass.el = v;
 	});
 };
 
@@ -100,11 +103,6 @@ var heading = function(app, h) {
 		az: Math.floor(h.magneticHeading * 1000) / 1000,
 		el: 0
 	};
-
-	window.addEventListener('deviceorientation', function(o) {
-		if(o.beta != 0)
-			app.$data.compass.el = Math.floor(o.beta * 1000) / 1000;
-	});
 };
 
 //document.addEventListener("DOMContentLoaded", main, false);

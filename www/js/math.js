@@ -2,7 +2,7 @@
  * SkyFinder - Math
  */
 
-// TODO: Figure out how the fuck that works
+// TODO: Figure out how that works
 // Stole from http://arachnoid.com/satfinder/index.html
 
 var toDeg = 180.0 / Math.PI;
